@@ -15,7 +15,12 @@ Then run `/mcp` and sign in with your VoiceDock account.
 
 **Claude (web and desktop)**
 
-Customize, Plugins, Add marketplace, and paste `https://github.com/flireo-bv-org/voicedock-skills`. Install VoiceDock, then connect it under Connectors and sign in with your VoiceDock account.
+Two ways, both under **Customize → Plugins**:
+
+- **Add marketplace** and paste `https://github.com/flireo-bv-org/voicedock-skills`, then install VoiceDock. New versions show up as updates.
+- **Upload** the zip: download [voicedock-plugin.zip](https://github.com/flireo-bv-org/voicedock-skills/releases/latest/download/voicedock-plugin.zip) (always the newest release) and upload it. Upload a new zip to update.
+
+Then connect the VoiceDock connector and sign in with your VoiceDock account. On a Team or Enterprise plan, an owner can add the plugin for the whole organisation.
 
 **Other agents (Cursor, Codex, Gemini CLI)**
 
