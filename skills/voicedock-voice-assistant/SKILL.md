@@ -9,9 +9,11 @@ VoiceDock runs AI voice assistants that answer and place phone calls and web cal
 
 Work in this order. Each step names the doc page that is the source of truth; fetch it rather than relying on memory, because model and voice names change.
 
+Related skills in this plugin: `voicedock-model-choice` (step 2), `voicedock-prompting` (step 3), `voicedock-tools-and-transfers` (steps 4 to 6), `voicedock-test-and-review` (step 7).
+
 ## 0. Connect
 
-- MCP (preferred in a coding agent): `https://mcp.hmsovereign.com/mcp`, OAuth sign-in, no key to paste. One tool per API endpoint. If the account has more than one organisation, call `listOrganizations` first and pass `organization_id` on every call.
+- MCP (preferred): `https://mcp.voicedock.ai/mcp` (the VoiceDock plugin adds it), OAuth sign-in with your VoiceDock account, no key to paste. One tool per API endpoint. Outbound calls, live call control, campaigns and starting test runs are only on the full endpoint `https://mcp.hmsovereign.com/mcp` or the REST API. If the account has more than one organisation, call `listOrganizations` first and pass `organization_id` on every call.
 - REST: `https://api.hmsovereign.com/api/v1`, header `Authorization: Bearer <key>`. Keys start with `fl_`. Read the key from an environment variable; never print it.
 - Docs index for agents: `https://doc.voicedock.ai/llms.txt`. Its top section lists the rules and every valid provider, model and voice. Read it before writing any config.
 

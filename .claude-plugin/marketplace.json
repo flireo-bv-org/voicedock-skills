@@ -1,0 +1,14 @@
+{
+  "name": "voicedock",
+  "owner": { "name": "VoiceDock", "url": "https://voicedock.ai" },
+  "metadata": {
+    "description": "Official VoiceDock plugins for Claude."
+  },
+  "plugins": [
+    {
+      "name": "voicedock",
+      "source": "./",
+      "description": "Build, test and improve voice assistants on VoiceDock: MCP server plus skills."
+    }
+  ]
+}

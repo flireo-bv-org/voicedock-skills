@@ -1,0 +1,23 @@
+{
+  "name": "voicedock",
+  "displayName": "VoiceDock",
+  "version": "1.0.0",
+  "description": "Build, test and improve phone and web voice assistants on VoiceDock: the VoiceDock MCP server plus skills for prompting per model, model choice, tools and transfers, and testing.",
+  "author": {
+    "name": "VoiceDock",
+    "url": "https://voicedock.ai"
+  },
+  "homepage": "https://doc.voicedock.ai",
+  "repository": "https://github.com/flireo-bv-org/voicedock-skills",
+  "license": "MIT",
+  "keywords": [
+    "voice",
+    "voice-ai",
+    "phone",
+    "telephony",
+    "receptionist",
+    "voicedock",
+    "mcp"
+  ],
+  "privacyPolicyUrl": "https://trust.voicedock.ai/legal/privacy-policy"
+}
