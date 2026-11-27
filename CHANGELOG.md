@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- `voicedock-whitelabel-partners`: how to handle the block with the customer's own frequently asked questions in the system prompt (leave it as it is; it is rebuilt from the customer's list on every save).
+
 ## 1.1.0
 
 - New skill `voicedock-whitelabel-partners`: whitelabel partners now reach their customers' organisations through the connector. The skill covers finding the right customer organisation, passing `organization_id` on every call, copying a proven assistant from your own organisation, and what stays in the dashboard (creating customers, invites, numbers, billing).
