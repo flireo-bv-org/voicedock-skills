@@ -37,6 +37,14 @@ Build and test an assistant in your own partner organisation first, then use it 
 
 When you update an assistant, send the complete configuration objects (`llm_config`, `stt_config`, `tts_config`): a partial object can remove settings you did not mean to change.
 
+### The customer's own questions in the prompt
+
+If you let a customer edit its frequently asked questions (on the Whitelabel page), the platform keeps them in the system prompt between `[KENNISBANK-BEGIN]` and `[KENNISBANK-EINDE]`. That block is rebuilt from the customer's own list every time the assistant is saved.
+
+- Leave the block as it is when you update the prompt. Edits inside it are overwritten, and removing it does not remove the questions.
+- Do not put your own instructions in it, and keep the rest of the prompt consistent with it: if the customer's answer about opening hours differs from your prompt, the caller hears both.
+- To change a question, ask the customer to change it in their portal, or switch customer editing off on the Whitelabel page.
+
 ## 4. What stays in the dashboard
 
 These steps are done on the **Whitelabel** page of the dashboard, not through the connector:
