@@ -21,7 +21,7 @@ Test a copy, not the assistant real callers reach. Calls to a live number send r
 | Arena: simulated callers with persona, noise, interruptions, verdict per criterion | Repeatable series, regressions | `https://doc.voicedock.ai/docs/features/arena` |
 | A human calling | The voice, real background noise, a real transfer | - |
 
-Arena places real calls: it needs a second number of the user's own with a SIP trunk, and it costs credits. Tell the user what a run costs before you start it. Arena never places transfers; test those by hand. Never test by calling real people.
+Arena places real calls: it needs a second number of the user's own with a SIP trunk, and it costs credits. Tell the user what a run costs before you start it. The plugin's MCP server (`mcp.voicedock.ai`) can set up suites and cases and read results, but starting a run needs the full endpoint `mcp.hmsovereign.com` or the REST API. Arena never places transfers; test those by hand. Never test by calling real people.
 
 ## 3. Test-caller rules
 
@@ -29,7 +29,7 @@ Arena places real calls: it needs a second number of the user's own with a SIP t
 - Never state a phone number, even when asked ("I don't have a mobile"): a simulated caller invents real numbers, and messages or links go to strangers.
 - Decline transfers. If transferred and someone answers, apologise and stop.
 - Stay in your own language even if the assistant switches.
-- Always set `max_duration_seconds`.
+- Always set a maximum duration (`max_duration_s` on an Arena case).
 - A simulated caller says "yes" to every readback, so a correct readback proves little: check the captured value against the script, and include a case with a correction.
 
 ## 4. Test set for a receptionist
@@ -52,7 +52,7 @@ Speech models vary from call to call: run at least six calls per version before 
 
 - Measure pauses in the recording, not in message timestamps; on speech-to-speech models those lag by a second or more.
 - A short call without messages is not necessarily silent: check the audio first. Callers who hang up during a long greeting look like this too.
-- Sort each problem: **assistant** (fix the prompt), **test caller or case** (fix the case), **platform or setup** (check the configuration; report to support if it persists). A misconfigured call is rejected with a reason in the call log; the platform does not silently switch to another model or voice.
+- Sort each problem: **assistant** (fix the prompt), **test caller or case** (fix the case), **platform or setup** (check the configuration; report to support if it persists).
 
 ## 7. Improve
 

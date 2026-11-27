@@ -28,7 +28,7 @@ Model and voice names change. Take them only from the "Valid configuration value
 - **A quiet setting and natural conversation**: compare two speech-to-speech models in the same test series (skill `voicedock-test-and-review`) and let the user listen.
 - **Strict wording, many numbers or names spoken back**: a pipeline, with the writing rules from skill `voicedock-prompting`.
 - **Regional accents**: test with callers who have them before you choose; write the language rule affirmatively in the prompt.
-- **Talking over callers who pause to think** (server-side turn detection): raise the end-of-speech silence threshold in the turn-detection settings.
+- **Talking over callers who pause to think** (server-side turn detection): raise the end-of-speech silence threshold (`llm_config.turn_detection.silence_duration_ms`).
 - **Lookups during the call**: tools; on GPT-Live the backend model handles tools and reasoning (`https://doc.voicedock.ai/docs/integrations/openai-gpt-live-integration`).
 
 ## 4. Voice
@@ -42,4 +42,4 @@ Model and voice names change. Take them only from the "Valid configuration value
 - A prompt does not carry over unchanged: rewrite the model-specific blocks (skill `voicedock-prompting`).
 - Updating replaces `llm_config` as a whole: send the complete config, never a single field.
 - Test the new version as a copy first, then switch the live number over with the user's go.
-- A misconfigured call is rejected with a reason in the call log; the platform does not silently fall back to another model or voice. If an assistant suddenly sounds different, look for a config change.
+- If an assistant suddenly sounds different, look for a recent config change first.

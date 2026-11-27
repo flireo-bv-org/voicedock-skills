@@ -62,7 +62,7 @@ Built-in tools (transfer, end call, and others) and their parameters: `https://d
 
 ## 5. Phone number and transfers
 
-- Attach the assistant to a number (`updateNumber` with `agent_id`). See `https://doc.voicedock.ai/docs/core-concepts/phone-numbers`.
+- Attach the assistant to a number (`updateNumber` with `assistant_id`). See `https://doc.voicedock.ai/docs/core-concepts/phone-numbers`.
 - A transfer leaves over the SIP trunk on the number the call came in on (`transfer_trunk_id`). A managed number has one already. A number the user brings needs one of their SIP trunks assigned, or the transfer fails mid-call.
 - Managed numbers cannot place outbound calls.
 - Behind forwarding or a phone system the caller ID is often the business's own number: the prompt must ask for a callback number. Place one test call after setting up forwarding to see what comes through (`references/telephony.md`).

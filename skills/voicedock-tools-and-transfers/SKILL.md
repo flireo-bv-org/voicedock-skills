@@ -35,7 +35,7 @@ Sources: `https://doc.voicedock.ai/docs/features/call-transfers`, `https://doc.v
 - **On GPT-Live a tool depends on three places**: the voice prompt (decides to hand off), the tool `description`, and `delegation.instructions` (the backend sees and calls the tools). When a tool fires late or never, adjust all three, and make sure the tool is listed as a backend capability in the delegation block (`voicedock-prompting`, `references/gpt-live.md`). Tell the backend that the caller has already confirmed, so it acts at once.
 - **Slow tools** (an outside knowledge source, an MCP server) leave the caller in silence: say in the prompt what to say while it runs, ask an outside chatbot one question at a time, and keep the most frequent answers in the prompt.
 - Say what to do when a tool fails or returns nothing: apologise briefly and take a message; never invent a result.
-- Two tools with the same name on one assistant make the call fail. Keep names unique.
+- Tool names must be unique on an assistant, and a webhook tool cannot be called `end_call` or `transfer_call`: saving such an assistant is refused with a `400`.
 - Use the user's systems through their API or MCP server; never ask for their passwords.
 
 ## 3. Ending the call
@@ -57,7 +57,7 @@ Without one of these, what the assistant collected stays only in the call record
 - `analysis_plan`: structured fields extracted after each call. Everything the analysis extracts, the prompt must also ask for. In the analysis prompt, take names, addresses and numbers **as the caller said them**, not as the assistant repeated them.
 - On speech-to-speech models the live transcript can miss words; set `postcall_stt_config` so the recording is re-transcribed before summary and analysis (`https://doc.voicedock.ai/docs/features/call-analysis`).
 - A webhook: the call result into the user's own system (`https://doc.voicedock.ai/docs/core-concepts/webhooks`). Webhook settings can exist on organisation, number and assistant; check which one actually applies and is signed. A caller with a withheld number arrives without a number; your handler must cope with that.
-- `notification_emails`: a summary per call by email; its table follows the analysis schema (field descriptions become labels).
+- `notification_emails`: a summary per call by email.
 
 ## 6. Check after a test call
 

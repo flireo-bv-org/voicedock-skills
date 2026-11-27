@@ -35,7 +35,7 @@ and add the MCP server `https://mcp.voicedock.ai/mcp` in your agent's MCP settin
 | `voicedock-tools-and-transfers` | Transfers, ending the call, own tools, and where the outcome of a call goes |
 | `voicedock-test-and-review` | Test with web calls and Arena, read calls back, and improve in small steps |
 
-The MCP server is `https://mcp.voicedock.ai/mcp`. It signs in with your own VoiceDock account and only reaches the organisations you belong to. Claude asks before any action that changes your account.
+The MCP server is `https://mcp.voicedock.ai/mcp`. It signs in with your own VoiceDock account and only reaches the organisations you belong to. Actions that change your account are marked as such, so Claude can ask you before running them.
 
 ## Documentation
 

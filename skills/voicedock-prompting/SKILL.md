@@ -1,6 +1,6 @@
 ---
 name: voicedock-prompting
-description: Write or fix the system prompt of a VoiceDock voice assistant for the model it runs on (pipeline, GPT-Live, Gemini Live, Grok Realtime, ElevenLabs Realtime). Use when writing a new prompt, or when an assistant ignores a rule, talks over callers, reacts to background voices, answers in the wrong language, reads phone numbers wrong, skips questions, goes silent, says "one moment" and nothing happens, or does not hang up.
+description: Write or fix the system prompt of a VoiceDock voice assistant for the model it runs on (pipeline, GPT-Live, Gemini Live, Grok Realtime). Use when writing a new prompt, or when an assistant ignores a rule, talks over callers, reacts to background voices, answers in the wrong language, reads phone numbers wrong, skips questions, goes silent, says "one moment" and nothing happens, or does not hang up.
 ---
 
 # Prompting a VoiceDock voice assistant
@@ -56,7 +56,7 @@ Each block under a plain heading, in this order:
 **Lookups and logic**
 - Never let the assistant say it will look something up unless a tool or backend actually does. "Let me check that" without anything behind it produces silence.
 - Dates, thresholds, conditional offers and safety rules (gas, smoke, fire) are applied inconsistently from a prompt. Compute them in your backend or tool and return the result.
-- The platform replaces `{{ now }}` (with spaces) by the current time. Other spellings stay literal, silently. Do not ask the model to convert clock times; give examples.
+- The platform replaces `{{ now }}` (written with spaces) by the current time; write it exactly like that. Do not ask the model to convert clock times; give examples.
 
 **Silence**
 - Do not write a silence policy in the prompt. Use the platform's `autonomous_silence_handling` with fixed sentences in `speech_config.silence` (`messages`, `final_message`). A prompt rule either does nothing or makes the caller hear it twice. See `https://doc.voicedock.ai/docs/features/autonomous-silence-handling`.
@@ -77,11 +77,11 @@ Each block under a plain heading, in this order:
 
 **Pipeline**: write for the ear. No digits or symbols in running text, numbers as words, phone numbers digit by digit separated by commas. Commas are the only pause that works; extra dots add pause and artefacts. Pronunciation fixes go in the assistant's pronunciation replacements; recognition of names can be helped with keyword boosting where the speech recognizer offers it.
 
-**Gemini Live**: the instruction is fixed for the whole call, so keep it short and complete. State the language twice, affirmatively. Describe pace in words. Give an explicit rule to hang up only after the caller said goodbye. Interruptions and background voices cannot be fixed in the prompt on this model.
+**Gemini Live**: the instruction is fixed for the whole call, so keep it short and complete. State the language twice, affirmatively. Describe pace in words. On `gemini-3.8-live`, give an explicit rule to hang up only after the caller said goodbye. Interruptions and background voices cannot be fixed in the prompt on this model.
 
 **GPT-Live**: see `references/gpt-live.md`: the Personality, Backchannel, Interruption and Background voices blocks; the delegation block (keep it verbatim); a short voice prompt with knowledge in the backend instructions; and how to avoid "one moment" with nothing behind it.
 
-**Grok Realtime**: persona, rules in execution order, short tool sentences, guardrails last. If it talks over callers who pause to think, raise the end-of-speech silence threshold in the assistant's turn-detection settings rather than writing a prompt rule.
+**Grok Realtime**: persona, rules in execution order, short tool sentences, guardrails last. If it talks over callers who pause to think, raise the end-of-speech silence threshold (`llm_config.turn_detection.silence_duration_ms`) rather than writing a prompt rule.
 
 ## 6. Facts: complete beats short when there is no lookup
 
