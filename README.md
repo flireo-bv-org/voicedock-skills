@@ -39,6 +39,7 @@ and add the MCP server `https://mcp.voicedock.ai/mcp` in your agent's MCP settin
 | `voicedock-model-choice` | Pick pipeline or speech-to-speech, provider, voice and EU data residency |
 | `voicedock-tools-and-transfers` | Transfers, ending the call, own tools, and where the outcome of a call goes |
 | `voicedock-test-and-review` | Test with web calls and Arena, read calls back, and improve in small steps |
+| `voicedock-whitelabel-partners` | For whitelabel partners: work in the right customer organisation, copy a proven assistant, and know what stays in the dashboard |
 
 The MCP server is `https://mcp.voicedock.ai/mcp`. It signs in with your own VoiceDock account and only reaches the organisations you belong to. Actions that change your account are marked as such, so Claude can ask you before running them.
 
