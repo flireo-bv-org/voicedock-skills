@@ -1,0 +1,31 @@
+name: Release zip
+
+# On every published release, attach voicedock-plugin.zip: the plugin as Claude (web and
+# desktop) accepts it under Customize > Plugins > Upload. The docs link to
+# releases/latest/download/voicedock-plugin.zip, so that link always serves the newest release.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - name: Version in plugin.json matches the tag
+        run: |
+          versie=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          tag="${{ github.event.release.tag_name }}"
+          [ "v$versie" = "$tag" ] || { echo "plugin.json version $versie does not match tag $tag"; exit 1; }
+      - name: Build the zip
+        run: zip -r voicedock-plugin.zip .claude-plugin .mcp.json skills README.md LICENSE
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" voicedock-plugin.zip --clobber

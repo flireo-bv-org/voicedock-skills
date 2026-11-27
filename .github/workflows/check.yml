@@ -1,0 +1,46 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Manifests are valid JSON
+        run: |
+          for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .mcp.json; do
+            python3 -m json.tool "$f" > /dev/null || { echo "Invalid JSON: $f"; exit 1; }
+          done
+      - name: Plugin and marketplace names match
+        run: |
+          plugin=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['name'])")
+          entry=$(python3 -c "import json;print(json.load(open('.claude-plugin/marketplace.json'))['plugins'][0]['name'])")
+          [ "$plugin" = "$entry" ] || { echo "plugin.json name '$plugin' differs from marketplace entry '$entry'"; exit 1; }
+      - name: Every skill has frontmatter with only name and description
+        run: |
+          python3 - <<'EOF'
+          import pathlib, re, sys
+          fouten = []
+          for p in sorted(pathlib.Path("skills").glob("*/SKILL.md")):
+              tekst = p.read_text(encoding="utf-8")
+              m = re.match(r"^---\n(.*?)\n---\n", tekst, re.S)
+              if not m:
+                  fouten.append(f"{p}: no frontmatter"); continue
+              sleutels = [r.split(":", 1)[0] for r in m.group(1).splitlines() if r and not r.startswith(" ")]
+              if sorted(sleutels) != ["description", "name"]:
+                  fouten.append(f"{p}: frontmatter keys {sleutels}")
+              naam = re.search(r"^name: (.+)$", m.group(1), re.M).group(1).strip()
+              if naam != p.parent.name:
+                  fouten.append(f"{p}: name '{naam}' differs from folder")
+              if len(tekst.splitlines()) > 500:
+                  fouten.append(f"{p}: more than 500 lines")
+          print("\n".join(fouten) or "ok")
+          sys.exit(1 if fouten else 0)
+          EOF
